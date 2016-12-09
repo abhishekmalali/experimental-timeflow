@@ -8,7 +8,7 @@ from batchlayers import LSTMLayerBatch, MeanLayerBatch, RegLayerBatch
 from inputs import inputs
 
 tf.app.flags.DEFINE_string('train', 'data/corr/records/train/train.tfrecords', 'Train data')
-tf.app.flags.DEFINE_string('train_ckpt', './ckpts/model.ckpt', 'Train checkpoint file')
+tf.app.flags.DEFINE_string('train_ckpt', 'ckpts/corr/model_ini.ckpt', 'Train checkpoint file')
 tf.app.flags.DEFINE_string('train_logs', 'tmp/corr/2', 'Log directory')
 tf.app.flags.DEFINE_integer('batch', 100, 'Batch size')
 tf.app.flags.DEFINE_integer('steps', 100000, 'Number of training iterations')
