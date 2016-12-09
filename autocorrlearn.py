@@ -11,7 +11,7 @@ tf.app.flags.DEFINE_string('train', 'data/corr/records/train/train.tfrecords', '
 tf.app.flags.DEFINE_string('train_ckpt', './ckpts/model.ckpt', 'Train checkpoint file')
 tf.app.flags.DEFINE_string('train_logs', 'tmp/corr/2', 'Log directory')
 tf.app.flags.DEFINE_integer('batch', 100, 'Batch size')
-tf.app.flags.DEFINE_integer('steps', 200, 'Number of training iterations')
+tf.app.flags.DEFINE_integer('steps', 100000, 'Number of training iterations')
 FLAGS = tf.app.flags.FLAGS
 
 def build_model(input_placeholder, input_size, hidden_layer_size, target_size):
@@ -56,9 +56,14 @@ def train():
 
         for step in tqdm(range(FLAGS.steps + 1)):
             sess.run(train_step)
-            summary = sess.run(summary_op)
-            writer.add_summary(summary, step)
-            writer.flush()
+
+            if step % 10 == 0:
+                summary = sess.run(summary_op)
+                writer.add_summary(summary, step)
+                writer.flush()
+
+            if step % 1000 == 0:
+                saver.save(sess, FLAGS.train_ckpt)
 
         coord.request_stop()
         coord.join(threads)
