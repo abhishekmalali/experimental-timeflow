@@ -45,7 +45,7 @@ def main(num_samples):
             time_samples, signal = generate_data(phi, sigma, 600)
         data_dict = create_data_dictionary(phi, sigma, time_samples, signal)
         file_name = 'series_'+str(i)
-        write_file('data/corr/train/', file_name, data_dict)
+        write_file('data/corr/raw/train/', file_name, data_dict)
 
 if __name__ == "__main__":
     main(100000)
